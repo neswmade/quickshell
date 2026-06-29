@@ -18,6 +18,14 @@ QtObject {
     readonly property color bgElevated: "#171717"
     readonly property color bgInput: "#1d1d1d"
 
+    readonly property real topBarOpacity: 0.9
+    readonly property color topBarColor: Qt.rgba(
+        Theme.bg.r,
+        Theme.bg.g,
+        Theme.bg.b,
+        Theme.topBarOpacity
+    )
+
     readonly property color text: "#fafafa"
     readonly property color textSecondary: "#a3a3a3"
     readonly property color textMuted: "#737373"
