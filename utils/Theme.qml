@@ -1,8 +1,18 @@
 pragma Singleton
 import QtQuick
+import Quickshell
 
 QtObject {
     id: root
+
+    readonly property var shellScreen: {
+        const list = Quickshell.screens
+        for (let i = 0; i < list.length; i++) {
+            if (list[i].name === "eDP-1")
+                return list[i]
+        }
+        return list.length > 0 ? list[0] : null
+    }
 
     readonly property color bg: "#0a0a0a"
     readonly property color bgElevated: "#171717"
@@ -22,6 +32,10 @@ QtObject {
 
     readonly property int rounding: 24
     readonly property int borderThickness: 4
+
     readonly property int notchHeight: 40
+    readonly property int notchMinWidth: 300
+    readonly property int notchMaxWidth: 360
+    readonly property int notchPadding: 16
     readonly property int notchRadius: 15
 }
