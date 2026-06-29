@@ -1,20 +1,19 @@
+pragma ComponentBehavior: Bound
 import QtQuick
 import QtQuick.Shapes
 import Quickshell
 import Quickshell.Wayland
 import qs.utils
+import qs.services
 
 PanelWindow {
     id: root
 
     screen: Theme.shellScreen
-
     anchors.top: true
     anchors.left: true
     anchors.right: true
-
     implicitHeight: Theme.notchHeight
-
     color: "transparent"
 
     WlrLayershell.layer: WlrLayer.Top
@@ -24,11 +23,39 @@ PanelWindow {
     property string activeState: "compact"
     property real notchWidth: Theme.notchMinWidth
     property real contentOpacity: 0
+    property real _lastVolume: -1
+
+    Connections {
+        target: Audio
+        function onVolumeChanged() {
+            if (root._lastVolume < 0) { root._lastVolume = Audio.volume; return }
+            if (Math.abs(Audio.volume - root._lastVolume) > 0.001) {
+                root._lastVolume = Audio.volume
+                root.showAudio()
+            }
+        }
+        function onMutedChanged() { root.showAudio() }
+    }
+
+    function showAudio() {
+        collapseTimer.stop()
+        activeState = "audio"
+        audioTimer.restart()
+    }
 
     Timer {
         id: collapseTimer
         interval: 2500
         onTriggered: root.activeState = "compact"
+    }
+
+    Timer {
+        id: audioTimer
+        interval: 2000
+        onTriggered: {
+            if (audioHud.interacting) { restart(); return }
+            root.activeState = "compact"
+        }
     }
 
     readonly property int expandWidthDuration: 220
@@ -160,8 +187,18 @@ PanelWindow {
         clip: true
         opacity: root.contentOpacity
 
-        // TODO: WorkspaceRuler  (visible: root.activeState === "compact")
-        // TODO: AudioHud        (visible: root.activeState === "audio")
+        AudioHud {
+            id: audioHud
+            anchors.fill: parent
+            activeState: root.activeState
+            volume: Audio.volume
+            muted: Audio.muted
+            onRequestSetVolume: fraction => Audio.setVolume(fraction)
+            onRequestBumpVolume: delta => Audio.bumpVolume(delta)
+            onRequestToggleMute: Audio.toggleMute()
+        }
+
+        // TODO: WorkspaceHud (visible: root.activeState === "compact")
     }
 
     HoverHandler {
