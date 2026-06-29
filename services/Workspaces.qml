@@ -1,2 +1,36 @@
-// listens to hyprctl socket events for list
-// of active, focused, and occupied workspace IDs
+pragma Singleton
+import QtQuick
+import Quickshell.Hyprland
+
+QtObject {
+    id: root
+
+    readonly property int activeWs: Math.max(1, Hyprland.focusedWorkspace?.id ?? 1)
+
+    readonly property int maxOccupied: {
+        let m = 0
+        const list = Hyprland.workspaces.values
+        for (let i = 0; i < list.length; i++) {
+            if (list[i].id > m) m = list[i].id
+        }
+        return m
+    }
+
+    readonly property var occupied: {
+        const s = {}
+        const list = Hyprland.workspaces.values
+        for (let i = 0; i < list.length; i++) {
+            if (list[i].id > 0) s[list[i].id] = true
+        }
+        return s
+    }
+
+    readonly property bool inSpecialWs: {
+        const mon = Hyprland.monitors.values
+        for (let i = 0; i < mon.length; i++) {
+            const name = mon[i].lastIpcObject?.specialWorkspace?.name ?? ""
+            if (name.length > 0) return true
+        }
+        return false
+    }
+}

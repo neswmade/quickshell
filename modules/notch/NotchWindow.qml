@@ -43,6 +43,17 @@ PanelWindow {
         audioTimer.restart()
     }
 
+    Connections {
+        target: Workspaces
+        function onActiveWsChanged() { root.showWorkspace() }
+    }
+
+    function showWorkspace() {
+        audioTimer.stop()
+        activeState = "workspace"
+        collapseTimer.restart()
+    }
+
     Timer {
         id: collapseTimer
         interval: 2500
@@ -198,7 +209,10 @@ PanelWindow {
             onRequestToggleMute: Audio.toggleMute()
         }
 
-        // TODO: WorkspaceHud (visible: root.activeState === "compact")
+        WorkspaceHud {
+            anchors.fill: parent
+            activeState: root.activeState
+        }
     }
 
     HoverHandler {

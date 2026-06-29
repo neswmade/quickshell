@@ -1,1 +1,6 @@
-// parse outputs from bluetoothctl
+pragma Singleton
+import QtQuick
+
+QtObject {
+    id: root
+}
