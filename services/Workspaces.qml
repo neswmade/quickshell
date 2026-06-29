@@ -25,10 +25,6 @@ QtObject {
         return s
     }
 
-    readonly property bool inSpecialWs: {
-        const mon = Hyprland.focusedMonitor
-        return mon && mon.lastIpcObject && mon.lastIpcObject.specialWorkspace
-            ? mon.lastIpcObject.specialWorkspace.name !== ""
-            : false
-    }
+    readonly property bool inSpecialWs:
+        (Hyprland.focusedMonitor?.lastIpcObject?.specialWorkspace?.name ?? "") !== ""
 }

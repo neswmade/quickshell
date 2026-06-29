@@ -46,6 +46,7 @@ PanelWindow {
     Connections {
         target: Workspaces
         function onActiveWsChanged() { root.showWorkspace() }
+        function onInSpecialWsChanged() { root.showWorkspace() }
     }
 
     function showWorkspace() {
