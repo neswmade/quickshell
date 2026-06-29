@@ -5,19 +5,8 @@ import "modules/border"
 import "modules/topbar"
 import "modules/notch"
 
-ShellRoot { 
-    // custom icon font bundle
-    
-    // topbar window
-    TopBarWindow {} 
-
-    // screen border
+ShellRoot {
+    TopBarWindow {}
     ScreenBorder {}
-
-    // notch window
     NotchWindow {}
-
-    // launcher window { visible = false } 
-    // syscontrols window { visible = false } 
-    // keyboard shortcuts
 }

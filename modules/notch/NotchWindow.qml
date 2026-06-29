@@ -71,68 +71,27 @@ PanelWindow {
 
     readonly property int expandWidthDuration: 220
     readonly property int collapseWidthDuration: 180
-
-    NumberAnimation {
-        id: widthExpandAnim
-        target: root
-        property: "notchWidth"
-        to: Theme.notchMaxWidth
-        duration: root.expandWidthDuration
-        easing.type: Easing.OutCubic
-    }
-
-    NumberAnimation {
-        id: widthCollapseAnim
-        target: root
-        property: "notchWidth"
-        to: Theme.notchMinWidth
-        duration: root.collapseWidthDuration
-        easing.type: Easing.OutCubic
-    }
-
     readonly property int expandOpacityDuration: 150
     readonly property int collapseOpacityDuration: 120
-    readonly property int expandOpacityDelay: 50
 
-    Timer {
-        id: contentOpacityDelay
-        interval: root.expandOpacityDelay
-        onTriggered: contentOpacityInAnim.restart()
+    Behavior on notchWidth {
+        NumberAnimation {
+            duration: root.activeState === "compact" ? root.collapseWidthDuration : root.expandWidthDuration
+            easing.type: Easing.OutCubic
+        }
     }
 
-    NumberAnimation {
-        id: contentOpacityInAnim
-        target: root
-        property: "contentOpacity"
-        to: 1
-        duration: root.expandOpacityDuration
-        easing.type: Easing.OutCubic
-    }
-
-    NumberAnimation {
-        id: contentOpacityOutAnim
-        target: root
-        property: "contentOpacity"
-        to: 0
-        duration: root.collapseOpacityDuration
-        easing.type: Easing.OutCubic
+    Behavior on contentOpacity {
+        NumberAnimation {
+            duration: root.activeState === "compact" ? root.collapseOpacityDuration : root.expandOpacityDuration
+            easing.type: Easing.OutCubic
+        }
     }
 
     onActiveStateChanged: {
         const expanding = activeState !== "compact"
-        if (expanding) {
-            widthCollapseAnim.stop()
-            contentOpacityOutAnim.stop()
-            contentOpacityDelay.stop()
-            widthExpandAnim.restart()
-            contentOpacityDelay.restart()
-        } else {
-            widthExpandAnim.stop()
-            contentOpacityInAnim.stop()
-            contentOpacityDelay.stop()
-            contentOpacityOutAnim.restart()
-            widthCollapseAnim.restart()
-        }
+        root.notchWidth = expanding ? Theme.notchMaxWidth : Theme.notchMinWidth
+        root.contentOpacity = expanding ? 1 : 0
     }
 
     Item {

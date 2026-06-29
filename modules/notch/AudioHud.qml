@@ -24,14 +24,14 @@ Item {
 
     readonly property url currentIcon: {
         if (root.muted)
-            return Qt.resolvedUrl("../icons/assets/volume-muted.svg")
+            return Qt.resolvedUrl("../../assets/volume-muted.svg")
         if (root.volume <= 0.001)
-            return Qt.resolvedUrl("../icons/assets/volume-none.svg")
+            return Qt.resolvedUrl("../../assets/volume-none.svg")
         if (root.volume < 0.33)
-            return Qt.resolvedUrl("../icons/assets/volume-low.svg")
+            return Qt.resolvedUrl("../../assets/volume-low.svg")
         if (root.volume < 0.66)
-            return Qt.resolvedUrl("../icons/assets/volume-medium.svg")
-        return Qt.resolvedUrl("../icons/assets/volume-max.svg")
+            return Qt.resolvedUrl("../../assets/volume-medium.svg")
+        return Qt.resolvedUrl("../../assets/volume-max.svg")
     }
 
     Item {
@@ -47,13 +47,11 @@ Item {
             width: 26
             height: 26
 
-            Image {
+            SvgIcon {
                 anchors.centerIn: parent
                 source: root.currentIcon
-                width: 26
-                height: 26
-                sourceSize: Qt.size(26, 26)
-                fillMode: Image.PreserveAspectFit
+                size: 26
+                iconColor: root.muted ? Theme.textMuted : Theme.text
             }
 
             HoverHandler { id: iconHover }
