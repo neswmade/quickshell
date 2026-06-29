@@ -86,4 +86,13 @@ PanelWindow {
             }
         }
     }
+
+    StatusRow {
+        id: statusRow
+        anchors.right: parent.right
+        anchors.rightMargin: 24
+        anchors.top: parent.top
+        anchors.topMargin: root.borderWidth
+            + (root.barHeight - root.borderWidth - statusRow.height) / 2
+    }
 }

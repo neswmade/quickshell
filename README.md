@@ -19,26 +19,27 @@ qs -c quickshell
 ## to-do
 
 - **BUG:** workspace ruler doesn't show "S" on special workspace. `inSpecialWs` reads `Hyprland.focusedMonitor.lastIpcObject.specialWorkspace.name` but binding doesn't update on toggle. Needs investigation - possibly `lastIpcObject` isn't reactive, may need `Hyprland.refreshMonitors()` or an event-socket signal.
+- **two-tone icons:** rebuild the font with split glyphs (outline track + filled portion as separate glyphs) stack two `FontIcon`s per icon color them differently
 - launcher (app search)
-- status bar - clock, battery, network, bluetooth
 - power controls (logout / reboot / suspend / shutdown)
-- fontello icon font to replace the temp svg tinting
 
 ## layout
 
 ```
 quickshell/
-├── shell.qml              # entrypoint, mounts the three windows
+├── shell.qml              # entrypoint, mounts the three windows + FontLoader
 ├── utils/Theme.qml        # colors, geometry, fonts, slider constants (one singleton)
 ├── services/              # thin wrappers over quickshell singletons
 │   ├── Audio.qml          # pipewire sink volume + mute
-│   └── Workspaces.qml     # hyprland active/occupied/special
+│   ├── Workspaces.qml     # hyprland active/occupied/special
+│   └── Time.qml           # clock (ticks every second)
 ├── components/            # reusable widgets
 │   ├── StyledSlider.qml
-│   └── SvgIcon.qml        # temp, see to-do
+│   └── FontIcon.qml       # fontello glyph, color via color prop
 ├── modules/               # one window each
 │   ├── notch/             # NotchWindow + Audio/Workspace huds
-│   ├── topbar/
+│   ├── topbar/            # TopBarWindow + StatusRow (bt/net/bat/clock)
 │   └── border/
-└── assets/                # svgs (temp until fontello)
+└── assets/
+    └── nesw.ttf           # fontello-built icon font
 ```

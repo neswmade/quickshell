@@ -50,6 +50,10 @@ QtObject {
     readonly property int notchPadding: 16
     readonly property int notchRadius: 15
 
+
+    readonly property int statusIconSize: 26
+    readonly property int clockFontSize: 18
+    
     readonly property string fontFamily: "DM Sans"
     readonly property string monoFamily: "Monaspace Neon NF"
 
