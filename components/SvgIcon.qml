@@ -1,5 +1,3 @@
-// ponytail: temp SVG-tinting icon. Replace with fontello FontIcon when the
-// custom glyph font lands (see modules/notch/AudioHud usage). Swap is mechanical.
 pragma ComponentBehavior: Bound
 import QtQuick
 import QtQuick.Window

@@ -1,8 +1,4 @@
 # nesw quickshell
-
-opinionated Hyprland shell built on [Quickshell](https://quickshell.outfoxxed.me).
-dark, quiet, laptop-first. pierre color scheme.
-
 ## install
 
 ```bash
@@ -13,21 +9,12 @@ qs -c quickshell
 
 ## dependencies
 
-- `quickshell-git` — the shell runtime, needs the git version not the tagged release
-- `hyprland` — window manager + IPC (workspaces, dispatch)
-- `pipewire` — audio
-- `qt6-base` `qt6-declarative` — QML + QtQuick.Shapes
-
-fonts:
-
-- `dm-sans` — UI
-- `monaspace-neon-nerd-font` — mono (currently unused, reserved for later)
-
-## what's here
-
-- **notch** — top-center pill. expands on volume change or workspace switch, collapses after a beat.
-- **topbar** — slim bar hugging the top corners, sits under the notch.
-- **border** — screen-edge frame with rounded bottom corners.
+- `quickshell-git`
+- `hyprland`
+- `pipewire`
+- `qt6-base` `qt6-declarative`
+- `dm-sans` (font)
+- `monaspace-neon-nerd-font` (font)
 
 ## to-do
 
@@ -42,7 +29,7 @@ fonts:
 quickshell/
 ├── shell.qml              # entrypoint, mounts the three windows
 ├── utils/Theme.qml        # colors, geometry, fonts, slider constants (one singleton)
-├── services/             # thin wrappers over quickshell singletons
+├── services/              # thin wrappers over quickshell singletons
 │   ├── Audio.qml          # pipewire sink volume + mute
 │   └── Workspaces.qml     # hyprland active/occupied/special
 ├── components/            # reusable widgets
@@ -54,5 +41,3 @@ quickshell/
 │   └── border/
 └── assets/                # svgs (temp until fontello)
 ```
-
-single monitor (hardcoded `eDP-1`). multi-monitor via `Quickshell.Variants` later if anyone asks.
