@@ -1,7 +1,3 @@
-// top-right cluster: bluetooth, network, battery, clock.
-// read-only glyphs + time text. No service wrappers — these are displays,
-// not reusable logic. If a click-action layer lands later, split each into
-// its own component then.
 pragma ComponentBehavior: Bound
 import QtQuick
 import Quickshell.Services.UPower
@@ -14,21 +10,19 @@ import "../../components"
 Row {
     id: root
 
-    spacing: 20
+    spacing: Theme.statusIconSize
 
-    // ---- bluetooth ----
     FontIcon {
         name: {
             const a = Bluetooth.defaultAdapter
             if (!a || !a.enabled) return "bluetooth-off"
             return "bluetooth"
         }
-        size: 20
+        size: Theme.statusIconSize
         iconColor: Theme.textSecondary
         anchors.verticalCenter: parent.verticalCenter
     }
 
-    // ---- network (ethernet wins over wifi) ----
     FontIcon {
         name: {
             const dev = Array.from(Networking.devices.values)
@@ -47,12 +41,11 @@ Row {
             if (s >= 0.50) return "wifi-medium"
             return "wifi-low"
         }
-        size: 20
+        size: Theme.statusIconSize
         iconColor: Theme.textSecondary
         anchors.verticalCenter: parent.verticalCenter
     }
 
-    // ---- battery ----
     FontIcon {
         name: {
             const b = UPower.displayDevice
@@ -67,17 +60,16 @@ Row {
             if (p >= 0.10) return "battery-low"
             return "battery-empty"
         }
-        size: 20
+        size: Theme.statusIconSize
         iconColor: Theme.textSecondary
         anchors.verticalCenter: parent.verticalCenter
     }
 
-    // ---- clock ----
     Text {
         text: Time.formatted
         color: Theme.text
         font.family: Theme.fontFamily
-        font.pixelSize: 15
+        font.pixelSize: Theme.clockFontSize
         font.weight: Font.Medium
         anchors.verticalCenter: parent.verticalCenter
     }

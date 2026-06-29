@@ -1,6 +1,3 @@
-// clock singleton — ticks every second, exposes a formatted string.
-// ponytail: no locale config yet, hard-coded English short format. Add i18n
-// when someone needs it.
 pragma Singleton
 import QtQuick
 
