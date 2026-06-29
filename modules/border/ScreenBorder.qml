@@ -36,28 +36,55 @@ PanelWindow {
 
             startX: 0
             startY: 0
-            PathLine { x: frame.width; y: 0 }
-            PathLine { x: frame.width; y: frame.height }
-            PathLine { x: 0; y: frame.height }
-            PathLine { x: 0; y: 0 }
+            PathLine {
+                x: frame.width
+                y: 0
+            }
+            PathLine {
+                x: frame.width
+                y: frame.height
+            }
+            PathLine {
+                x: 0
+                y: frame.height
+            }
+            PathLine {
+                x: 0
+                y: 0
+            }
 
-            PathMove { x: root.thickness; y: root.thickness }
-            PathLine { x: frame.width - root.thickness; y: root.thickness }
-            PathLine { x: frame.width - root.thickness; y: frame.height - root.thickness - root.rounding }
+            PathMove {
+                x: root.thickness
+                y: root.thickness
+            }
+            PathLine {
+                x: frame.width - root.thickness
+                y: root.thickness
+            }
+            PathLine {
+                x: frame.width - root.thickness
+                y: frame.height - root.thickness - root.rounding
+            }
             PathArc {
-                x: frame.width - root.thickness - root.rounding;
-                y: frame.height - root.thickness;
-                radiusX: root.rounding;
+                x: frame.width - root.thickness - root.rounding
+                y: frame.height - root.thickness
+                radiusX: root.rounding
                 radiusY: root.rounding
             }
-            PathLine { x: root.thickness + root.rounding; y: frame.height - root.thickness }
+            PathLine {
+                x: root.thickness + root.rounding
+                y: frame.height - root.thickness
+            }
             PathArc {
-                x: root.thickness;
-                y: frame.height - root.thickness - root.rounding;
-                radiusX: root.rounding;
+                x: root.thickness
+                y: frame.height - root.thickness - root.rounding
+                radiusX: root.rounding
                 radiusY: root.rounding
             }
-            PathLine { x: root.thickness; y: root.thickness }
+            PathLine {
+                x: root.thickness
+                y: root.thickness
+            }
         }
     }
 }

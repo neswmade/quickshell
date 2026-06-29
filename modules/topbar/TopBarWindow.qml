@@ -39,7 +39,10 @@ PanelWindow {
             startX: 0
             startY: 0
 
-            PathLine { x: shape.width; y: 0 }
+            PathLine {
+                x: shape.width
+                y: 0
+            }
 
             PathLine {
                 x: shape.width
@@ -77,7 +80,10 @@ PanelWindow {
                 y: root.barHeight + root.cornerRadius
             }
 
-            PathLine { x: 0; y: 0 }
+            PathLine {
+                x: 0
+                y: 0
+            }
         }
     }
 }

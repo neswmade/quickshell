@@ -14,17 +14,19 @@ QtObject {
     }
 
     function setVolume(fraction) {
-        if (!sink?.audio) return
-        sink.audio.muted = false
-        sink.audio.volume = Math.max(0, Math.min(1, fraction))
+        if (!sink?.audio)
+            return;
+        sink.audio.muted = false;
+        sink.audio.volume = Math.max(0, Math.min(1, fraction));
     }
 
     function bumpVolume(delta) {
-        setVolume(volume + delta)
+        setVolume(volume + delta);
     }
 
     function toggleMute() {
-        if (!sink?.audio) return
-        sink.audio.muted = !sink.audio.muted
+        if (!sink?.audio)
+            return;
+        sink.audio.muted = !sink.audio.muted;
     }
 }
