@@ -26,10 +26,15 @@ Item {
         color: root.muted ? Theme.sliderMuted : Theme.sliderFill
 
         Behavior on width {
-            NumberAnimation { duration: Theme.sliderFillAnim; easing.type: Easing.OutCubic }
+            NumberAnimation {
+                duration: Theme.sliderFillAnim
+                easing.type: Easing.OutCubic
+            }
         }
         Behavior on color {
-            ColorAnimation { duration: Theme.sliderColorAnim }
+            ColorAnimation {
+                duration: Theme.sliderColorAnim
+            }
         }
     }
 }

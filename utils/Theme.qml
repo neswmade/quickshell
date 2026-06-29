@@ -6,12 +6,12 @@ QtObject {
     id: root
 
     readonly property var shellScreen: {
-        const list = Quickshell.screens
+        const list = Quickshell.screens;
         for (let i = 0; i < list.length; i++) {
             if (list[i].name === "eDP-1")
-                return list[i]
+                return list[i];
         }
-        return list.length > 0 ? list[0] : null
+        return list.length > 0 ? list[0] : null;
     }
 
     readonly property color bg: "#0a0a0a"
@@ -19,12 +19,7 @@ QtObject {
     readonly property color bgInput: "#1d1d1d"
 
     readonly property real topBarOpacity: 0.9
-    readonly property color topBarColor: Qt.rgba(
-        Theme.bg.r,
-        Theme.bg.g,
-        Theme.bg.b,
-        Theme.topBarOpacity
-    )
+    readonly property color topBarColor: Qt.rgba(Theme.bg.r, Theme.bg.g, Theme.bg.b, Theme.topBarOpacity)
 
     readonly property color text: "#fafafa"
     readonly property color textSecondary: "#a3a3a3"

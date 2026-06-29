@@ -28,31 +28,40 @@ PanelWindow {
     Connections {
         target: Audio
         function onVolumeChanged() {
-            if (root._lastVolume < 0) { root._lastVolume = Audio.volume; return }
+            if (root._lastVolume < 0) {
+                root._lastVolume = Audio.volume;
+                return;
+            }
             if (Math.abs(Audio.volume - root._lastVolume) > 0.001) {
-                root._lastVolume = Audio.volume
-                root.showAudio()
+                root._lastVolume = Audio.volume;
+                root.showAudio();
             }
         }
-        function onMutedChanged() { root.showAudio() }
+        function onMutedChanged() {
+            root.showAudio();
+        }
     }
 
     function showAudio() {
-        collapseTimer.stop()
-        activeState = "audio"
-        audioTimer.restart()
+        collapseTimer.stop();
+        activeState = "audio";
+        audioTimer.restart();
     }
 
     Connections {
         target: Workspaces
-        function onActiveWsChanged() { root.showWorkspace() }
-        function onInSpecialWsChanged() { root.showWorkspace() }
+        function onActiveWsChanged() {
+            root.showWorkspace();
+        }
+        function onInSpecialWsChanged() {
+            root.showWorkspace();
+        }
     }
 
     function showWorkspace() {
-        audioTimer.stop()
-        activeState = "workspace"
-        collapseTimer.restart()
+        audioTimer.stop();
+        activeState = "workspace";
+        collapseTimer.restart();
     }
 
     Timer {
@@ -65,8 +74,11 @@ PanelWindow {
         id: audioTimer
         interval: 2000
         onTriggered: {
-            if (audioHud.interacting) { restart(); return }
-            root.activeState = "compact"
+            if (audioHud.interacting) {
+                restart();
+                return;
+            }
+            root.activeState = "compact";
         }
     }
 
@@ -90,9 +102,9 @@ PanelWindow {
     }
 
     onActiveStateChanged: {
-        const expanding = activeState !== "compact"
-        root.notchWidth = expanding ? Theme.notchMaxWidth : Theme.notchMinWidth
-        root.contentOpacity = expanding ? 1 : 0
+        const expanding = activeState !== "compact";
+        root.notchWidth = expanding ? Theme.notchMaxWidth : Theme.notchMinWidth;
+        root.contentOpacity = expanding ? 1 : 0;
     }
 
     Item {
@@ -106,7 +118,9 @@ PanelWindow {
             height: Theme.notchHeight
         }
     }
-    mask: Region { item: hitMask }
+    mask: Region {
+        item: hitMask
+    }
 
     Shape {
         id: shape
@@ -119,33 +133,60 @@ PanelWindow {
         ShapePath {
             fillColor: Theme.bg
             strokeWidth: 0
-            startX: 0; startY: 0
-            PathLine { x: 0; y: Theme.borderThickness }
+            startX: 0
+            startY: 0
+            PathLine {
+                x: 0
+                y: Theme.borderThickness
+            }
             PathArc {
-                x: Theme.notchRadius; y: Theme.borderThickness + Theme.notchRadius
-                radiusX: Theme.notchRadius; radiusY: Theme.notchRadius
+                x: Theme.notchRadius
+                y: Theme.borderThickness + Theme.notchRadius
+                radiusX: Theme.notchRadius
+                radiusY: Theme.notchRadius
                 direction: PathArc.Clockwise
             }
-            PathLine { x: Theme.notchRadius; y: Theme.notchHeight - Theme.notchRadius }
+            PathLine {
+                x: Theme.notchRadius
+                y: Theme.notchHeight - Theme.notchRadius
+            }
             PathArc {
-                x: Theme.notchRadius * 2; y: Theme.notchHeight
-                radiusX: Theme.notchRadius; radiusY: Theme.notchRadius
+                x: Theme.notchRadius * 2
+                y: Theme.notchHeight
+                radiusX: Theme.notchRadius
+                radiusY: Theme.notchRadius
                 direction: PathArc.Counterclockwise
             }
-            PathLine { x: shape.width - Theme.notchRadius * 2; y: Theme.notchHeight }
+            PathLine {
+                x: shape.width - Theme.notchRadius * 2
+                y: Theme.notchHeight
+            }
             PathArc {
-                x: shape.width - Theme.notchRadius; y: Theme.notchHeight - Theme.notchRadius
-                radiusX: Theme.notchRadius; radiusY: Theme.notchRadius
+                x: shape.width - Theme.notchRadius
+                y: Theme.notchHeight - Theme.notchRadius
+                radiusX: Theme.notchRadius
+                radiusY: Theme.notchRadius
                 direction: PathArc.Counterclockwise
             }
-            PathLine { x: shape.width - Theme.notchRadius; y: Theme.borderThickness + Theme.notchRadius }
+            PathLine {
+                x: shape.width - Theme.notchRadius
+                y: Theme.borderThickness + Theme.notchRadius
+            }
             PathArc {
-                x: shape.width; y: Theme.borderThickness
-                radiusX: Theme.notchRadius; radiusY: Theme.notchRadius
+                x: shape.width
+                y: Theme.borderThickness
+                radiusX: Theme.notchRadius
+                radiusY: Theme.notchRadius
                 direction: PathArc.Clockwise
             }
-            PathLine { x: shape.width; y: 0 }
-            PathLine { x: 0; y: 0 }
+            PathLine {
+                x: shape.width
+                y: 0
+            }
+            PathLine {
+                x: 0
+                y: 0
+            }
         }
     }
 
@@ -180,9 +221,9 @@ PanelWindow {
         cursorShape: Qt.PointingHandCursor
         onHoveredChanged: {
             if (hovered)
-                collapseTimer.stop()
+                collapseTimer.stop();
             else if (root.activeState !== "compact")
-                collapseTimer.restart()
+                collapseTimer.restart();
         }
     }
 }

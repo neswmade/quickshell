@@ -15,7 +15,10 @@ Item {
     visible: opacity > 0
     opacity: root.activeState === "workspace" ? 1 : 0
     Behavior on opacity {
-        NumberAnimation { duration: 150; easing.type: Easing.OutCubic }
+        NumberAnimation {
+            duration: 150
+            easing.type: Easing.OutCubic
+        }
     }
 
     Row {
@@ -24,7 +27,10 @@ Item {
         x: root.width / 2 - root.stepPx / 2 - (Workspaces.activeWs - 1) * root.stepPx
 
         Behavior on x {
-            NumberAnimation { duration: 280; easing.type: Easing.OutCubic }
+            NumberAnimation {
+                duration: 280
+                easing.type: Easing.OutCubic
+            }
         }
 
         Repeater {
@@ -60,14 +66,13 @@ Item {
                     radius: 1
                     anchors.horizontalCenter: tick.horizontalCenter
                     anchors.verticalCenter: tick.verticalCenter
-                    color: Workspaces.inSpecialWs ? Theme.info
-                         : tick.isActive          ? Theme.accent
-                         : tick.isOccupied        ? Theme.textSecondary
-                         :                          Theme.textMuted
+                    color: Workspaces.inSpecialWs ? Theme.info : tick.isActive ? Theme.accent : tick.isOccupied ? Theme.textSecondary : Theme.textMuted
                     opacity: tick.isActive || tick.isOccupied ? 1 : 0.5
 
                     Behavior on color {
-                        ColorAnimation { duration: 180 }
+                        ColorAnimation {
+                            duration: 180
+                        }
                     }
                 }
             }

@@ -12,26 +12,29 @@ Item {
 
     signal requestSetVolume(real fraction)
     signal requestBumpVolume(real delta)
-    signal requestToggleMute()
+    signal requestToggleMute
 
     readonly property bool interacting: iconHover.hovered || dragArea.pressed
 
     visible: opacity > 0
     opacity: root.activeState === "audio" ? 1 : 0
     Behavior on opacity {
-        NumberAnimation { duration: 150; easing.type: Easing.OutCubic }
+        NumberAnimation {
+            duration: 150
+            easing.type: Easing.OutCubic
+        }
     }
 
-    readonly property url currentIcon: {
+    readonly property string currentIcon: {
         if (root.muted)
-            return Qt.resolvedUrl("../../assets/volume-muted.svg")
+            return "volume-muted";
         if (root.volume <= 0.001)
-            return Qt.resolvedUrl("../../assets/volume-none.svg")
+            return "volume-none";
         if (root.volume < 0.33)
-            return Qt.resolvedUrl("../../assets/volume-low.svg")
+            return "volume-low";
         if (root.volume < 0.66)
-            return Qt.resolvedUrl("../../assets/volume-medium.svg")
-        return Qt.resolvedUrl("../../assets/volume-max.svg")
+            return "volume-medium";
+        return "volume-max";
     }
 
     Item {
@@ -47,14 +50,16 @@ Item {
             width: 26
             height: 26
 
-            SvgIcon {
+            FontIcon {
                 anchors.centerIn: parent
-                source: root.currentIcon
+                name: root.currentIcon
                 size: 26
                 iconColor: root.muted ? Theme.textMuted : Theme.text
             }
 
-            HoverHandler { id: iconHover }
+            HoverHandler {
+                id: iconHover
+            }
 
             TapHandler {
                 acceptedDevices: PointerDevice.Mouse | PointerDevice.TouchPad
@@ -87,7 +92,7 @@ Item {
                 onPressed: mouse => root.requestSetVolume(mouse.x / slider.width)
                 onPositionChanged: mouse => {
                     if (dragArea.pressed)
-                        root.requestSetVolume(mouse.x / slider.width)
+                        root.requestSetVolume(mouse.x / slider.width);
                 }
             }
         }
@@ -95,11 +100,11 @@ Item {
         WheelHandler {
             acceptedDevices: PointerDevice.Mouse | PointerDevice.TouchPad
             onWheel: event => {
-                const delta = event.angleDelta.y || event.pixelDelta.y
+                const delta = event.angleDelta.y || event.pixelDelta.y;
                 if (delta > 0)
-                    root.requestBumpVolume(Theme.volumeStep)
+                    root.requestBumpVolume(Theme.volumeStep);
                 else if (delta < 0)
-                    root.requestBumpVolume(-Theme.volumeStep)
+                    root.requestBumpVolume(-Theme.volumeStep);
             }
         }
     }

@@ -8,23 +8,24 @@ QtObject {
     readonly property int activeWs: Math.max(1, Hyprland.focusedWorkspace?.id ?? 1)
 
     readonly property int maxOccupied: {
-        let m = 0
-        const list = Hyprland.workspaces.values
+        let m = 0;
+        const list = Hyprland.workspaces.values;
         for (let i = 0; i < list.length; i++) {
-            if (list[i].id > m) m = list[i].id
+            if (list[i].id > m)
+                m = list[i].id;
         }
-        return m
+        return m;
     }
 
     readonly property var occupied: {
-        const s = {}
-        const list = Hyprland.workspaces.values
+        const s = {};
+        const list = Hyprland.workspaces.values;
         for (let i = 0; i < list.length; i++) {
-            if (list[i].id > 0) s[list[i].id] = true
+            if (list[i].id > 0)
+                s[list[i].id] = true;
         }
-        return s
+        return s;
     }
 
-    readonly property bool inSpecialWs:
-        (Hyprland.focusedMonitor?.lastIpcObject?.specialWorkspace?.name ?? "") !== ""
+    readonly property bool inSpecialWs: (Hyprland.focusedMonitor?.lastIpcObject?.specialWorkspace?.name ?? "") !== ""
 }
