@@ -26,7 +26,7 @@ QtObject {
 
     function _tick() { root.now = new Date() }
 
-    Timer {
+    readonly property Timer _timer: Timer {
         interval: 1000
         running: true
         repeat: true
