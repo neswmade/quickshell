@@ -101,12 +101,24 @@ PanelWindow {
         onClicked: root.open = false
     }
 
+    // input mask: only the panel area receives input, rest passes through.
+    // ponytail: empty when closed so the overlay never eats desktop input.
+    Item {
+        id: hitMask
+        x: panelHost.x
+        y: panelHost.y
+        width: root.open ? panelHost.width : 0
+        height: root.open ? panelHost.height : 0
+        visible: false
+    }
+    mask: Region { item: hitMask }
+
     Item {
         id: panelHost
         x: (parent.width - width) / 2
         y: parent.height * root.topMarginRatio
         width: root.panelWidth
-        height: searchRow.height + (root.results.length > 0 ? 1 + list.height : 0)
+        height: searchRow.height + (root.results.length > 0 ? 1 + list.implicitHeight : 0)
         transformOrigin: Item.Top
         visible: root.open
         scale: root.open ? 1 : 0.92
@@ -198,7 +210,6 @@ PanelWindow {
                 anchors.topMargin: 1
                 anchors.left: parent.left
                 anchors.right: parent.right
-                anchors.bottom: parent.bottom
                 anchors.margins: root.panelPadding
                 clip: true
                 interactive: count > root.maxResults
@@ -242,7 +253,7 @@ PanelWindow {
                         source: {
                             const ic = row.modelData ? row.modelData.icon : ""
                             if (!ic) return ""
-                            return ic.startsWith("/") ? "file://" + ic : Quickshell.iconPath(ic, "image-missing")
+                            return ic.startsWith("/") ? "file://" + ic : Quickshell.iconPath(ic, "")
                         }
                         visible: status === Image.Ready
                     }
