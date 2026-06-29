@@ -5,6 +5,7 @@ import qs.utils
 import "modules/border"
 import "modules/topbar"
 import "modules/notch"
+import "modules/launcher"
 
 ShellRoot {
     FontLoader {
@@ -14,4 +15,5 @@ ShellRoot {
     TopBarWindow {}
     ScreenBorder {}
     NotchWindow {}
+    LauncherWindow {}
 }
