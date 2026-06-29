@@ -19,7 +19,7 @@ Row {
             return "bluetooth"
         }
         size: Theme.statusIconSize
-        iconColor: Theme.textSecondary
+        iconColor: Theme.text
         anchors.verticalCenter: parent.verticalCenter
     }
 
@@ -42,7 +42,7 @@ Row {
             return "wifi-low"
         }
         size: Theme.statusIconSize
-        iconColor: Theme.textSecondary
+        iconColor: Theme.text
         anchors.verticalCenter: parent.verticalCenter
     }
 
@@ -61,7 +61,7 @@ Row {
             return "battery-empty"
         }
         size: Theme.statusIconSize
-        iconColor: Theme.textSecondary
+        iconColor: Theme.text
         anchors.verticalCenter: parent.verticalCenter
     }
 
