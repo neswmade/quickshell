@@ -18,8 +18,9 @@ qs -c quickshell
 
 ## to-do
 
+- **BUG:** workspace ruler doesn't show "S" on special workspace. `inSpecialWs` reads `Hyprland.focusedMonitor.lastIpcObject.specialWorkspace.name` but binding doesn't update on toggle. Needs investigation - possibly `lastIpcObject` isn't reactive, may need `Hyprland.refreshMonitors()` or an event-socket signal.
 - launcher (app search)
-- status bar — clock, battery, network, bluetooth
+- status bar - clock, battery, network, bluetooth
 - power controls (logout / reboot / suspend / shutdown)
 - fontello icon font to replace the temp svg tinting
 
