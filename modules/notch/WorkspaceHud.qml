@@ -8,7 +8,7 @@ Item {
 
     property string activeState: "compact"
 
-    readonly property int stepPx: 28
+    readonly property int stepPx: 46
 
     readonly property int rulerMax: Math.max(Workspaces.activeWs, Workspaces.maxOccupied) + 2
 
@@ -78,7 +78,7 @@ Item {
         text: Workspaces.inSpecialWs ? "S" : Workspaces.activeWs
         color: Theme.accent
         font.family: Theme.fontFamily
-        font.pixelSize: 11
+        font.pixelSize: 22
         font.weight: Font.Bold
         anchors.left: parent.horizontalCenter
         anchors.leftMargin: 6
