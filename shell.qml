@@ -6,6 +6,7 @@ import "modules/border"
 import "modules/topbar"
 import "modules/notch"
 import "modules/launcher"
+import "modules/systemcontrols"
 
 ShellRoot {
     FontLoader {
@@ -16,4 +17,5 @@ ShellRoot {
     ScreenBorder {}
     NotchWindow {}
     LauncherWindow {}
+    PowerControls {}
 }
