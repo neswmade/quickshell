@@ -6,9 +6,10 @@ QtObject {
     id: root
 
     readonly property var shellScreen: {
+        const preferred = Quickshell.env("QS_SCREEN") || "eDP-1";
         const list = Quickshell.screens;
         for (let i = 0; i < list.length; i++) {
-            if (list[i].name === "eDP-1")
+            if (list[i].name === preferred)
                 return list[i];
         }
         return list.length > 0 ? list[0] : null;
