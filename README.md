@@ -18,8 +18,7 @@ qs -c quickshell
 
 ## to-do
 
-- **BUG:** workspace ruler doesn't show "S" on special workspace. `inSpecialWs` reads `Hyprland.focusedMonitor.lastIpcObject.specialWorkspace.name` but binding doesn't update on toggle. Needs investigation — possibly `lastIpcObject` isn't reactive, may need `Hyprland.refreshMonitors()` or an event-socket signal.
-- **two-tone icons:** fontello glyphs single-path single-color. Rebuild font with split glyphs (outline track + filled portion), stack two `FontIcon`s, color separately. Deferred polish — current single-color works fine.
+- **two-tone icons:** rebuild the font with split glyphs (outline track + filled portion as separate glyphs) stack two `FontIcon`s per icon color them differently
 
 ## layout
 
