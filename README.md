@@ -19,15 +19,13 @@ qs -c quickshell
 ## to-do
 
 - **two-tone icons:** rebuild the font with split glyphs (outline track + filled portion as separate glyphs) stack two `FontIcon`s per icon color them differently
-- launcher (app search)
-- power controls (logout / reboot / suspend / shutdown)
 
 ## layout
 
 ```
 quickshell/
-├── shell.qml              # entrypoint, mounts the three windows + FontLoader
-├── utils/Theme.qml        # colors, geometry, fonts, slider constants (one singleton)
+├── shell.qml              # entrypoint, mounts all modules + FontLoader
+├── utils/Theme.qml        # colors, geometry, fonts, one singleton
 ├── services/              # thin wrappers over quickshell singletons
 │   ├── Audio.qml          # pipewire sink volume + mute
 │   ├── Workspaces.qml     # hyprland active/occupied/special
@@ -35,10 +33,12 @@ quickshell/
 ├── components/            # reusable widgets
 │   ├── StyledSlider.qml
 │   └── FontIcon.qml       # fontello glyph, color via color prop
-├── modules/               # one window each
-│   ├── notch/             # NotchWindow + Audio/Workspace huds
-│   ├── topbar/            # TopBarWindow + StatusRow (bt/net/bat/clock)
-│   └── border/
+├── modules/
+│   ├── notch/             # notch pill + audio/workspace hud
+│   ├── topbar/            # top bar + status row (bluetooth/network/battery/clock)
+│   ├── border/            # screen-edge frame with rounded corners
+│   ├── launcher/          # app search overlay (↑/↓/enter, IPC toggle)
+│   └── systemcontrols/    # power dialog (logout/suspend/reboot/shutdown)
 └── assets/
     └── nesw.ttf           # fontello-built icon font
 ```
