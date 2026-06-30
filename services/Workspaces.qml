@@ -27,12 +27,5 @@ QtObject {
         return s;
     }
 
-    readonly property bool inSpecialWs: {
-        const list = Hyprland.workspaces.values
-        for (let i = 0; i < list.length; i++){
-            if(list[i].name.startsWith("special:"))
-                return true
-            }
-            return false
-    }
+    readonly property bool inSpecialWs: (Hyprland.focusedMonitor?.lastIpcObject?.specialWorkspace?.name ?? "") !== ""
 }
