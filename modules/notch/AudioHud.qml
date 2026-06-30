@@ -25,17 +25,9 @@ Item {
         }
     }
 
-    readonly property string currentIcon: {
-        if (root.muted)
-            return "volume-muted";
-        if (root.volume <= 0.001)
-            return "volume-none";
-        if (root.volume < 0.33)
-            return "volume-low";
-        if (root.volume < 0.66)
-            return "volume-medium";
-        return "volume-max";
-    }
+    readonly property bool showVolumeBody: !root.muted
+    readonly property bool showVolumeMedium: !root.muted && root.volume >= 0.33
+    readonly property bool showVolumeMax: !root.muted && root.volume >= 0.66
 
     Item {
         id: layout
@@ -51,10 +43,31 @@ Item {
             height: 26
 
             FontIcon {
-                anchors.centerIn: parent
-                name: root.currentIcon
+                name: "volume-track"
                 size: 26
-                iconColor: root.muted ? Theme.textMuted : Theme.text
+                iconColor: Theme.textMuted
+                anchors.centerIn: parent
+            }
+            FontIcon {
+                name: "volume-body"
+                size: 26
+                iconColor: Theme.text
+                anchors.centerIn: parent
+                visible: root.showVolumeBody
+            }
+            FontIcon {
+                name: "volume-medium"
+                size: 26
+                iconColor: Theme.text
+                anchors.centerIn: parent
+                visible: root.showVolumeMedium
+            }
+            FontIcon {
+                name: "volume-max"
+                size: 26
+                iconColor: Theme.text
+                anchors.centerIn: parent
+                visible: root.showVolumeMax
             }
 
             HoverHandler {

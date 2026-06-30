@@ -12,57 +12,151 @@ Row {
 
     spacing: Theme.statusIconSize
 
-    FontIcon {
-        name: {
-            const a = Bluetooth.defaultAdapter
-            if (!a || !a.enabled) return "bluetooth-off"
-            return "bluetooth"
-        }
-        size: Theme.statusIconSize
-        iconColor: Theme.text
+    Item {
+        width: Theme.statusIconSize
+        height: Theme.statusIconSize
         anchors.verticalCenter: parent.verticalCenter
+
+        FontIcon {
+            name: "bluetooth-symbol"
+            size: Theme.statusIconSize
+            iconColor: Theme.textMuted
+            anchors.fill: parent
+        }
+        FontIcon {
+            name: "bluetooth-left-dot"
+            size: Theme.statusIconSize
+            iconColor: Theme.textMuted
+            anchors.fill: parent
+            visible: {
+                const a = Bluetooth.defaultAdapter
+                return a && a.enabled
+            }
+        }
+        FontIcon {
+            name: "bluetooth-right-dot"
+            size: Theme.statusIconSize
+            iconColor: Theme.textMuted
+            anchors.fill: parent
+            visible: {
+                const a = Bluetooth.defaultAdapter
+                return a && a.enabled
+            }
+        }
     }
 
-    FontIcon {
-        name: {
+    Item {
+        id: netIcon
+        width: Theme.statusIconSize
+        height: Theme.statusIconSize
+        anchors.verticalCenter: parent.verticalCenter
+
+        readonly property bool onEthernet: {
             const dev = Array.from(Networking.devices.values)
             const eth = dev.find(d => d.type === DeviceType.Wired)
-            if (eth && eth.connected) return "ethernet"
-            const wifi = dev.find(d => d.type === DeviceType.Wifi)
-            if (!wifi || !Networking.wifiEnabled || !Networking.wifiHardwareEnabled)
-                return "wifi-none"
-            const active = Array.from(wifi.networks.values).find(n => n.connected)
-            if (!active) return "wifi-none"
-            if (wifi.state === ConnectionState.Connecting
-                || wifi.state === ConnectionState.Disconnecting)
-                return "wifi-connect"
-            const s = active.signalStrength
-            if (s >= 0.75) return "wifi-high"
-            if (s >= 0.50) return "wifi-medium"
-            return "wifi-low"
+            return eth && eth.connected
         }
-        size: Theme.statusIconSize
-        iconColor: Theme.text
-        anchors.verticalCenter: parent.verticalCenter
+        readonly property var wifiDev: {
+            if (onEthernet) return null
+            return Array.from(Networking.devices.values)
+                .find(d => d.type === DeviceType.Wifi) || null
+        }
+        readonly property var activeNet: wifiDev
+            ? Array.from(wifiDev.networks.values).find(n => n.connected) || null
+            : null
+        readonly property bool wifiOn: wifiDev && Networking.wifiEnabled && Networking.wifiHardwareEnabled
+        readonly property bool connecting: wifiDev
+            && (wifiDev.state === ConnectionState.Connecting
+                || wifiDev.state === ConnectionState.Disconnecting)
+
+        FontIcon {
+            name: "ethernet"
+            size: Theme.statusIconSize
+            iconColor: Theme.textSecondary
+            anchors.fill: parent
+            visible: netIcon.onEthernet
+        }
+
+        Item {
+            anchors.fill: parent
+            visible: !netIcon.onEthernet
+
+            FontIcon {
+                name: "wifi-none"
+                size: Theme.statusIconSize
+                iconColor: Theme.textMuted
+                anchors.fill: parent
+                visible: netIcon.wifiOn
+            }
+            FontIcon {
+                name: "wifi-low"
+                size: Theme.statusIconSize
+                iconColor: Theme.textSecondary
+                anchors.fill: parent
+                visible: netIcon.wifiOn && netIcon.activeNet
+                    && netIcon.activeNet.signalStrength >= 0.25
+                    && !netIcon.connecting
+            }
+            FontIcon {
+                name: "wifi-medium"
+                size: Theme.statusIconSize
+                iconColor: Theme.textSecondary
+                anchors.fill: parent
+                visible: netIcon.wifiOn && netIcon.activeNet
+                    && netIcon.activeNet.signalStrength >= 0.50
+                    && !netIcon.connecting
+            }
+            FontIcon {
+                name: "wifi-high"
+                size: Theme.statusIconSize
+                iconColor: Theme.textSecondary
+                anchors.fill: parent
+                visible: netIcon.wifiOn && netIcon.activeNet
+                    && netIcon.activeNet.signalStrength >= 0.75
+                    && !netIcon.connecting
+            }
+
+        }
     }
 
-    FontIcon {
-        name: {
-            const b = UPower.displayDevice
-            if (!b || !b.ready) return "battery-empty"
-            const p = b.percentage
-            if (b.state === UPowerDeviceState.Charging
-                || b.state === UPowerDeviceState.FullyCharged)
-                return "battery-charging"
-            if (p >= 0.90) return "battery-full"
-            if (p >= 0.60) return "battery-high"
-            if (p >= 0.30) return "battery-medium"
-            if (p >= 0.10) return "battery-low"
-            return "battery-empty"
-        }
-        size: Theme.statusIconSize
-        iconColor: Theme.text
+    Item {
+        width: Theme.statusIconSize
+        height: Theme.statusIconSize
         anchors.verticalCenter: parent.verticalCenter
+
+        readonly property var bat: {
+            const b = UPower.displayDevice
+            return (b && b.ready) ? b : null
+        }
+        readonly property real pct: bat ? bat.percentage : -1
+        readonly property bool charging: bat
+            && (bat.state === UPowerDeviceState.Charging
+                || bat.state === UPowerDeviceState.FullyCharged)
+        readonly property string fillGlyph: {
+            if (pct < 0) return ""
+            if (pct >= 0.90) return "battery-full"
+            if (pct >= 0.60) return "battery-high"
+            if (pct >= 0.30) return "battery-medium"
+            if (pct >= 0.10) return "battery-low"
+            return "" // empty
+        }
+        readonly property color fillColor:
+            charging ? Theme.success : Theme.textSecondary
+
+        FontIcon {
+            name: "battery-track"
+            size: Theme.statusIconSize
+            iconColor: Theme.textMuted
+            anchors.fill: parent
+            visible: bat !== null
+        }
+        FontIcon {
+            name: parent.fillGlyph
+            size: Theme.statusIconSize
+            iconColor: parent.fillColor
+            anchors.fill: parent
+            visible: parent.fillGlyph !== ""
+        }
     }
 
     Text {
