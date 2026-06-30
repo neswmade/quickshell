@@ -18,17 +18,15 @@ qs -c quickshell
 
 ## to-do
 
-- **BUG:** workspace ruler doesn't show "S" on special workspace. `inSpecialWs` reads `Hyprland.focusedMonitor.lastIpcObject.specialWorkspace.name` but binding doesn't update on toggle. Needs investigation - possibly `lastIpcObject` isn't reactive, may need `Hyprland.refreshMonitors()` or an event-socket signal.
-- **two-tone icons:** rebuild the font with split glyphs (outline track + filled portion as separate glyphs) stack two `FontIcon`s per icon color them differently
-- launcher (app search)
-- power controls (logout / reboot / suspend / shutdown)
+- **BUG:** workspace ruler doesn't show "S" on special workspace. `inSpecialWs` reads `Hyprland.focusedMonitor.lastIpcObject.specialWorkspace.name` but binding doesn't update on toggle. Needs investigation — possibly `lastIpcObject` isn't reactive, may need `Hyprland.refreshMonitors()` or an event-socket signal.
+- **two-tone icons:** fontello glyphs single-path single-color. Rebuild font with split glyphs (outline track + filled portion), stack two `FontIcon`s, color separately. Deferred polish — current single-color works fine.
 
 ## layout
 
 ```
 quickshell/
-├── shell.qml              # entrypoint, mounts the three windows + FontLoader
-├── utils/Theme.qml        # colors, geometry, fonts, slider constants (one singleton)
+├── shell.qml              # entrypoint, mounts all modules + FontLoader
+├── utils/Theme.qml        # colors, geometry, fonts, one singleton
 ├── services/              # thin wrappers over quickshell singletons
 │   ├── Audio.qml          # pipewire sink volume + mute
 │   ├── Workspaces.qml     # hyprland active/occupied/special
@@ -36,10 +34,12 @@ quickshell/
 ├── components/            # reusable widgets
 │   ├── StyledSlider.qml
 │   └── FontIcon.qml       # fontello glyph, color via color prop
-├── modules/               # one window each
-│   ├── notch/             # NotchWindow + Audio/Workspace huds
-│   ├── topbar/            # TopBarWindow + StatusRow (bt/net/bat/clock)
-│   └── border/
+├── modules/
+│   ├── notch/             # notch pill + audio/workspace hud
+│   ├── topbar/            # top bar + status row (bluetooth/network/battery/clock)
+│   ├── border/            # screen-edge frame with rounded corners
+│   ├── launcher/          # app search overlay (↑/↓/enter, IPC toggle)
+│   └── systemcontrols/    # power dialog (logout/suspend/reboot/shutdown)
 └── assets/
     └── nesw.ttf           # fontello-built icon font
 ```
