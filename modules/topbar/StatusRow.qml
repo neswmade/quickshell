@@ -40,7 +40,7 @@ Row {
             anchors.fill: parent
             visible: {
                 const a = Bluetooth.defaultAdapter
-                return a && a.enabled
+                return !!(a && a.enabled)
             }
         }
     }
