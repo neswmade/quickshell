@@ -54,7 +54,7 @@ Row {
         readonly property bool onEthernet: {
             const dev = Array.from(Networking.devices.values)
             const eth = dev.find(d => d.type === DeviceType.Wired)
-            return eth && eth.connected
+            return !!(eth && eth.connected)
         }
         readonly property var wifiDev: {
             if (onEthernet) return null
@@ -64,10 +64,10 @@ Row {
         readonly property var activeNet: wifiDev
             ? Array.from(wifiDev.networks.values).find(n => n.connected) || null
             : null
-        readonly property bool wifiOn: wifiDev && Networking.wifiEnabled && Networking.wifiHardwareEnabled
-        readonly property bool connecting: wifiDev
+        readonly property bool wifiOn: !!(wifiDev && Networking.wifiEnabled && Networking.wifiHardwareEnabled)
+        readonly property bool connecting: !!(wifiDev
             && (wifiDev.state === ConnectionState.Connecting
-                || wifiDev.state === ConnectionState.Disconnecting)
+                || wifiDev.state === ConnectionState.Disconnecting))
 
         FontIcon {
             name: "ethernet"
