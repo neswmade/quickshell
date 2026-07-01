@@ -138,7 +138,7 @@ Row {
             if (pct >= 0.60) return "battery-high"
             if (pct >= 0.30) return "battery-medium"
             if (pct >= 0.10) return "battery-low"
-            return "" // empty
+            return ""
         }
         readonly property color fillColor:
             charging ? Theme.success : Theme.textSecondary
@@ -148,7 +148,7 @@ Row {
             size: Theme.statusIconSize
             iconColor: Theme.textMuted
             anchors.fill: parent
-            visible: bat !== null
+            visible: parent.bat !== null
         }
         FontIcon {
             name: parent.fillGlyph
