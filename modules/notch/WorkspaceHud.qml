@@ -7,6 +7,7 @@ Item {
     id: root
 
     property string activeState: "compact"
+    required property var screen
 
     readonly property int stepPx: 46
 
@@ -53,7 +54,7 @@ Item {
                         width: 1
                         height: 6
                         radius: 0.5
-                        color: Workspaces.inSpecialWs ? Theme.info : Theme.textMuted
+                        color: Workspaces.inSpecialWs(root.screen) ? Theme.info : Theme.textMuted
                         opacity: 0.3
                         x: tick.width / 2 + modelData * (root.stepPx / 6) - width / 2
                         anchors.verticalCenter: tick.verticalCenter
@@ -66,7 +67,7 @@ Item {
                     radius: 1
                     anchors.horizontalCenter: tick.horizontalCenter
                     anchors.verticalCenter: tick.verticalCenter
-                    color: Workspaces.inSpecialWs ? Theme.info : tick.isActive ? Theme.accent : tick.isOccupied ? Theme.textSecondary : Theme.textMuted
+                    color: Workspaces.inSpecialWs(root.screen) ? Theme.info : tick.isActive ? Theme.accent : tick.isOccupied ? Theme.textSecondary : Theme.textMuted
                     opacity: tick.isActive || tick.isOccupied ? 1 : 0.5
 
                     Behavior on color {
@@ -80,7 +81,7 @@ Item {
     }
 
     Text {
-        text: Workspaces.inSpecialWs ? "S" : Workspaces.activeWs
+        text: Workspaces.inSpecialWs(root.screen) ? "S" : Workspaces.activeWs
         color: Theme.accent
         font.family: Theme.fontFamily
         font.pixelSize: 22

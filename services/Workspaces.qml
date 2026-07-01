@@ -1,5 +1,6 @@
 pragma Singleton
 import QtQuick
+import Quickshell
 import Quickshell.Hyprland
 
 QtObject {
@@ -27,5 +28,20 @@ QtObject {
         return s;
     }
 
-    readonly property bool inSpecialWs: (Hyprland.focusedMonitor?.lastIpcObject?.specialWorkspace?.name ?? "") !== ""
+    function inSpecialWs(screen) {
+        const mon = Hyprland.monitorFor(screen);
+        if (!mon)
+            return false;
+        const special = mon.lastIpcObject.specialWorkspace;
+        const name = special ? (special.name ?? "") : "";
+        return name.length > 0;
+    }
+
+    property Connections _hyprlandConn: Connections {
+        target: Hyprland
+        function onRawEvent(event) {
+            if (event.name === "activespecialv2")
+                Hyprland.refreshMonitors();
+        }
+    }
 }

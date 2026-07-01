@@ -211,6 +211,7 @@ PanelWindow {
         }
 
         WorkspaceHud {
+            screen: root.screen
             anchors.fill: parent
             activeState: root.activeState
         }
