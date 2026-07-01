@@ -37,11 +37,15 @@ QtObject {
         return name.length > 0;
     }
 
+    signal specialWsChanged()
+
     property Connections _hyprlandConn: Connections {
         target: Hyprland
         function onRawEvent(event) {
-            if (event.name === "activespecialv2")
+            if (event.name === "activespecialv2") {
                 Hyprland.refreshMonitors();
+                root.specialWsChanged();
+            }
         }
     }
 }

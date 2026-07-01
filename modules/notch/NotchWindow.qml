@@ -53,7 +53,7 @@ PanelWindow {
         function onActiveWsChanged() {
             root.showWorkspace();
         }
-        function onInSpecialWsChanged() {
+        function onSpecialWsChanged() {
             root.showWorkspace();
         }
     }
