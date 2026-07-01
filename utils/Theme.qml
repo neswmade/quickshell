@@ -26,9 +26,6 @@ QtObject {
     readonly property color textSecondary: "#a3a3a3"
     readonly property color textMuted: "#737373"
 
-    readonly property color accent: "#009fff"
-    readonly property color accentHover: "#0190e7"
-
     readonly property color error: "#ff2e3f"
     readonly property color warning: "#ffca00"
     readonly property color success: "#07c480"
@@ -38,7 +35,7 @@ QtObject {
     readonly property int sliderRadius: sliderHeight / 2
     readonly property color sliderTrack: bgInput
     readonly property real sliderTrackOpacity: 0.6
-    readonly property color sliderFill: accent
+    readonly property color sliderFill: text
     readonly property color sliderMuted: textMuted
     readonly property int sliderFillAnim: 80
     readonly property int sliderColorAnim: 120

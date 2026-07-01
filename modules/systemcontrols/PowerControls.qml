@@ -45,7 +45,7 @@ PanelWindow {
 
     readonly property color panelBg: Qt.rgba(Theme.bg.r, Theme.bg.g, Theme.bg.b, 0.94)
     readonly property color textPrimary: Theme.text
-    readonly property color rowActive: Qt.rgba(Theme.accent.r, Theme.accent.g, Theme.accent.b, 0.22)
+    readonly property color rowActive: Qt.rgba(Theme.text.r, Theme.text.g, Theme.text.b, 0.22)
 
     property bool open: false
 

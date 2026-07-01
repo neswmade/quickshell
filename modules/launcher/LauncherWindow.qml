@@ -46,7 +46,7 @@ PanelWindow {
     readonly property color textSecondary: Theme.textSecondary
     readonly property color textPlaceholder: Theme.textMuted
     readonly property color dividerColor: Qt.rgba(Theme.text.r, Theme.text.g, Theme.text.b, 0.1)
-    readonly property color rowActive: Qt.rgba(Theme.accent.r, Theme.accent.g, Theme.accent.b, 0.22)
+    readonly property color rowActive: Qt.rgba(Theme.text.r, Theme.text.g, Theme.text.b, 0.22)
     readonly property color badgeBg: Qt.rgba(Theme.text.r, Theme.text.g, Theme.text.b, 0.13)
 
     property bool open: false
@@ -204,7 +204,7 @@ PanelWindow {
                     font.pixelSize: 22
                     font.weight: Font.Medium
                     color: root.textPrimary
-                    selectionColor: Qt.rgba(Theme.accent.r, Theme.accent.g, Theme.accent.b, 0.4)
+                    selectionColor: Qt.rgba(Theme.text.r, Theme.text.g, Theme.text.b, 0.4)
                     selectedTextColor: root.textPrimary
                     focus: true
 
