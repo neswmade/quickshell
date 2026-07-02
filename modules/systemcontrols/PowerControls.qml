@@ -28,8 +28,8 @@ PanelWindow {
     readonly property int panelWidth: 320
     readonly property int buttonHeight: 52
     readonly property int panelPadding: 16
-    readonly property int panelRadius: 20
-    readonly property int rowRadius: 8
+    readonly property int panelRadius: Theme.radius
+    readonly property int rowRadius: Theme.radiusTight
     readonly property int rowSpacing: 4
 
     readonly property var actions: [

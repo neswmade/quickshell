@@ -19,7 +19,7 @@ PanelWindow {
     WlrLayershell.namespace: "nesw-border"
 
     readonly property int thickness: Theme.borderThickness
-    readonly property int rounding: Theme.rounding
+    readonly property int rounding: Theme.radius
     readonly property color frameColor: Theme.bg
 
     mask: Region {}

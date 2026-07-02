@@ -29,9 +29,9 @@ PanelWindow {
     readonly property int searchHeight: 76
     readonly property int itemHeight: 70
     readonly property int maxResults: 8
-    readonly property int panelRadius: 20
+    readonly property int panelRadius: Theme.radius
     readonly property int panelPadding: 16
-    readonly property int rowRadius: 8
+    readonly property int rowRadius: Theme.radiusTight
     readonly property int openHintWidth: 96
     readonly property real panelTopMarginRatio: 0.17
 
@@ -278,7 +278,7 @@ PanelWindow {
 
                     Rectangle {
                         anchors.fill: parent
-                        radius: 11
+                        radius: Theme.radiusTight
                         color: root.badgeBg
                         visible: selectedIcon.status !== Image.Ready
 
@@ -366,7 +366,7 @@ PanelWindow {
                     Rectangle {
                         width: 36
                         height: 36
-                        radius: 11
+                        radius: Theme.radiusTight
                         anchors.left: parent.left
                         anchors.leftMargin: 20
                         anchors.verticalCenter: parent.verticalCenter

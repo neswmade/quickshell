@@ -22,7 +22,7 @@ PanelWindow {
 
     readonly property int barHeight: 40
     readonly property int borderWidth: Theme.borderThickness
-    readonly property int cornerRadius: Theme.rounding
+    readonly property int cornerRadius: Theme.radius
     readonly property color barColor: Theme.topBarColor
 
     mask: Region {}
