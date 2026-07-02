@@ -72,7 +72,7 @@ Row {
         FontIcon {
             name: "ethernet"
             size: Theme.statusIconSize
-            iconColor: Theme.textSecondary
+            iconColor: Theme.text
             anchors.fill: parent
             visible: netIcon.onEthernet
         }
@@ -91,7 +91,7 @@ Row {
             FontIcon {
                 name: "wifi-low"
                 size: Theme.statusIconSize
-                iconColor: Theme.textSecondary
+                iconColor: Theme.text
                 anchors.fill: parent
                 visible: netIcon.wifiOn && netIcon.activeNet
                     && netIcon.activeNet.signalStrength >= 0.25
@@ -100,7 +100,7 @@ Row {
             FontIcon {
                 name: "wifi-medium"
                 size: Theme.statusIconSize
-                iconColor: Theme.textSecondary
+                iconColor: Theme.text
                 anchors.fill: parent
                 visible: netIcon.wifiOn && netIcon.activeNet
                     && netIcon.activeNet.signalStrength >= 0.50
@@ -109,7 +109,7 @@ Row {
             FontIcon {
                 name: "wifi-high"
                 size: Theme.statusIconSize
-                iconColor: Theme.textSecondary
+                iconColor: Theme.text
                 anchors.fill: parent
                 visible: netIcon.wifiOn && netIcon.activeNet
                     && netIcon.activeNet.signalStrength >= 0.75
@@ -141,7 +141,7 @@ Row {
             return ""
         }
         readonly property color fillColor:
-            charging ? Theme.success : Theme.textSecondary
+            charging ? Theme.success : Theme.text
 
         FontIcon {
             name: "battery-track"

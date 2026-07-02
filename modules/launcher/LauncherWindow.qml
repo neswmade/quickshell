@@ -184,7 +184,7 @@ PanelWindow {
                 FontIcon {
                     name: "search"
                     size: 26
-                    iconColor: root.textSecondary
+                    iconColor: root.textPrimary
                     anchors.left: parent.left
                     anchors.leftMargin: 28
                     anchors.verticalCenter: parent.verticalCenter
