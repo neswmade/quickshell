@@ -13,7 +13,7 @@ qs -c quickshell
 - `hyprland`
 - `pipewire`
 - `qt6-base` `qt6-declarative`
-- `dm-sans` (font)
+- `General Sans` (font)
 - `monaspace-neon-nerd-font` (font)
 
 ## to-do

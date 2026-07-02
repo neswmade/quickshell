@@ -52,7 +52,7 @@ QtObject {
     readonly property int statusIconSize: 26
     readonly property int clockFontSize: 18
     
-    readonly property string fontFamily: "DM Sans"
+    readonly property string fontFamily: "General Sans"
     readonly property string monoFamily: "Monaspace Neon NF"
 
     readonly property real volumeStep: 0.05
