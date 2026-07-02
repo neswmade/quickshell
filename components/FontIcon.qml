@@ -39,7 +39,7 @@ Text {
         "volume-track":         59406,
         "wifi-high":            59407,
         "wifi-low":             59408,
-        "wifi-medium":          59409,
+        "wifi-medium":          59411,
         "wifi-none":            59410
     })
 }
