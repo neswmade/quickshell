@@ -35,11 +35,11 @@ Text {
         "search":               59402,
         "volume-body":          59403,
         "volume-max":           59404,
-        "volume-medium":        59405,
+        "volume-medium":        59411,
         "volume-track":         59406,
         "wifi-high":            59407,
         "wifi-low":             59408,
-        "wifi-medium":          59411,
+        "wifi-medium":          59409,
         "wifi-none":            59410
     })
 }
